@@ -26,6 +26,10 @@ namespace HYS_Test.Controllers
         public ActionResult<IEnumerable<Meeting>> GetMeetings(int userId)
         {
             var meetings = _userService.GetMeetingList(userId);
+            if(!meetings.Any())
+            {
+                return NotFound($"Could not find meetigs for user with id:{userId}");
+            }
             return Ok(meetings);
         }
     }
